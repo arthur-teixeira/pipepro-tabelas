@@ -4,3 +4,8 @@
   padding: 0;
   border: 0;
 }
+
+.container {
+  width: 75%;
+  margin: auto;
+}
