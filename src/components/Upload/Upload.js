@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { api } from '../'
+import { api, Table } from '../'
 import xlsx from 'xlsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Upload() {
 
@@ -35,15 +36,18 @@ export default function Upload() {
     }
   }
 
-  const createTable = () => {
-    return { __html: htmlTable }
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" name="file" onChange={e => handleChange(e)} />
-      <button type="submit">Enviar</button>
-      <div dangerouslySetInnerHTML={createTable()}></div>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <div className="custom-file form-control">
+          <input type="file" className="custom-file-input" id="customFile" onChange={e => handleChange(e)} />
+          <label className="custom-file-label" for="customFile">Choose file</label>
+        </div>
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <Table htmlContent={htmlTable} />
+    </div>
   )
 }
