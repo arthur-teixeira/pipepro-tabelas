@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { api, Table } from '../'
 import xlsx from 'xlsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './upload.module.css'
 
 export default function Upload() {
 
   const [file, setFile] = useState();
   const [htmlTable, setHtmlTable] = useState();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     const data = new FormData();
     data.append('table', file);
@@ -22,6 +22,8 @@ export default function Upload() {
   }
 
   const handleChange = e => {
+    if (!e.target.files[0]) return;
+
     setFile(e.target.files[0]);
     const reader = new FileReader();
     reader.readAsArrayBuffer(e.target.files[0]);
@@ -33,18 +35,18 @@ export default function Upload() {
       const htmlstr = xlsx.write(wb, { type: 'binary', bookType: 'html' });
       setHtmlTable(htmlstr);
 
+      handleSubmit();
+
     }
   }
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
+    <div className={styles.container}>
+      <form>
         <div className="custom-file form-control">
           <input type="file" className="custom-file-input" id="customFile" onChange={e => handleChange(e)} />
-          <label className="custom-file-label" for="customFile">Choose file</label>
+          <label className="custom-file-label" htmlFor="customFile">Escolha um arquivo</label>
         </div>
-
-        <button type="submit">Enviar</button>
       </form>
 
       <Table htmlContent={htmlTable} />

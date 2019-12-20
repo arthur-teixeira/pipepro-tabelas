@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './table.module.css'
 
 const Table = props => {
 
@@ -7,9 +8,7 @@ const Table = props => {
   }
 
   return (
-    <div dangerouslySetInnerHTML={createTable()}>
-
-    </div>
+    <div dangerouslySetInnerHTML={createTable()} className={styles.tableParent} />
   );
 }
 

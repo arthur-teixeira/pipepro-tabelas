@@ -1,0 +1,8 @@
+.tableParent table tr:nth-child(4n){
+  background: #c7c3c3;
+}
+
+.tableParent table{
+  width: 100%;
+  border: 1px solid #c7c3c3;
+}
